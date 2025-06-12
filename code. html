@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Tracker</title>
+  <style>
+    /* Basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    /* Attendance Tracking styles */
+    .attendance-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .qr-code {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+    
+    .attendance-status {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    /* Dashboard styles */
+    .dashboard-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .student-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    
+    .student-list th, .student-list td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .student-list th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    // React component for Attendance Tracking
+    function AttendanceTracker() {
+      const [attendanceStatus, setAttendanceStatus] = React.useState('');
+
+      const handleQRScan = () => {
+        // Simulate scanning a QR code
+        setAttendanceStatus('Present');
+      };
+
+      return (
+        <div className="attendance-container">
+          <div className="qr-code" onClick={handleQRScan}>
+            {/* QR code image goes here */}
+            <img src="qr-code.png" alt="QR Code" />
+          </div>
+          <div className="attendance-status">{attendanceStatus}</div>
+        </div>
+      );
+    }
+
+    // React component for Attendance Dashboard
+    function AttendanceDashboard() {
+      const students = [
+        { name: 'John Doe', attendance: 'Present' },
+        { name: 'Jane Smith', attendance: 'Absent' },
+        { name: 'Michael Johnson', attendance: 'Present' },
+        { name: 'Emily Wilson', attendance: 'Present' },
+      ];
+
+      return (
+        <div className="dashboard-container">
+          <table className="student-list">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((student, index) => (
+                <tr key={index}>
+                  <td>{student.name}</td>
+                  <td>{student.attendance}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    // Render the application
+    ReactDOM.render(
+      <div className="container">
+        <h1>Attendance Tracker</h1>
+        <AttendanceTracker />
+        <AttendanceDashboard />
+      </div>,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+</html>
